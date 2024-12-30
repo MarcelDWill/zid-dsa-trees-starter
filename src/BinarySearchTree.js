@@ -141,14 +141,74 @@ class BinarySearchTree {
     }
     return this.left.findMin();
   }
+  dfsInOrder(values = []) {
+    // First, process the left node recursively
+    if (this.left) {
+      values = this.left.dfsInOrder(values);
+    }
+
+    // Next, process the current node
+    values.push(this.value);
+
+    // Finally, process the right node recursively
+    if (this.right) {
+      values = this.right.dfsInOrder(values);
+    }
+
+    return values;
+  }
+  dfsPreOrder(values=[]) {
+    // First, process the current node
+    values.push(this.value);
+
+    // Next, process the left node recursively
+    if (this.left) {
+      values = this.left.dfsPreOrder(values);
+    }
+
+    // Finally, process the right node recursively
+    if (this.right) {
+      values = this.right.dfsPreOrder(values);
+    }
+
+    return values;
+  }
+  dfsPostOrder(values = []) {
+    // First, process the left node recursively
+    if (this.left) {
+      values = this.left.dfsPostOrder(values);
+    }
+
+    // Next, process the right node recursively
+    if (this.right) {
+      values = this.right.dfsPostOrder(values);
+    }
+
+    // Finally, process the current node
+    values.push(this.value);
+
+    return values;
+  }
+
+
+
+
+
+
 }
 
 module.exports = BinarySearchTree;
 
 
-const bst = new BinarySearchTree(5);
-bst.insert(2);
-bst.insert(19);
-bst.insert(15);
-bst.insert(28);
-bst.insert(18);
+const bst = new BinarySearchTree(5, 5);
+bst.insert(2, 2);
+bst.insert(20, 20);
+bst.insert(1, 1);
+bst.insert(4, 4);
+bst.insert(15, 15);
+bst.insert(21, 21);
+bst.insert(10, 10);
+bst.insert(17, 17);
+bst.insert(25, 25);
+
+console.log(bst.dfsPostOrder());
